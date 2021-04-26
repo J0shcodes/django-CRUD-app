@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Blog</title>
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+  {% if user.is_authenticated %}
+
+  <header>
+    <h1><a href="{% url 'home' %}">Welcome {{ user.username }}</a></h1>
+  </header>
+
+  <div class="nav-right">
+    <a href="{% url 'post_new' %}">New Post</a>
+    <a href="{% url 'register' %}">Register Now</a>
+    <a href="{% url 'login' %}">Login into account</a>
+    <a href="{% url 'logout' %}">Logout</a>
+    <a href="{% url 'password_reset' %}">Reset password</a>
+  </div>
+
+  {% else %}
+
+  <header>
+    <h1><a href="{% url 'home' %}">My Blog</a></h1>
+  </header>
+
+  <div class="nav-right">
+    <a href="{% url 'post_new' %}">New Post</a>
+    <a href="{% url 'register' %}">Register Now</a>
+    <a href="{% url 'login' %}">Login into account</a>
+  </div>
+
+  {% endif %}
+
+  <div>
+    {% block content %}
+    {% endblock %}
+  </div>
+  
+</body>
+</html>
